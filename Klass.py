@@ -7,7 +7,7 @@ import urllib.request, json
 
 def hent_klass_data(klassifikasjonsliste, lagringsplass = "Metadata/"):
     if klassifikasjonsliste == "kommune":
-        url = 'http://data.ssb.no/api/klass/v1/classifications/131/codesAt.json?date=2021-01-19&presentationNamePattern=%7Bcode%7D%20%7Bname%7D'
+        url = 'https://data.ssb.no/api/klass/v1/classifications/131/codesAt.json?date=2021-01-19&presentationNamePattern=%7Bcode%7D%20%7Bname%7D'
         kommuner = pd.read_json(url)['codes']
         kommuner = pd.json_normalize(kommuner)
         kommuner = kommuner.rename(columns={
@@ -19,7 +19,7 @@ def hent_klass_data(klassifikasjonsliste, lagringsplass = "Metadata/"):
         kommuner = kommuner.set_index("Kommune")
         kommuner.to_json(f'{lagringsplass}kommuner.json', orient = "index")
     if klassifikasjonsliste == "fylke":
-        url = 'http://data.ssb.no/api/klass/v1/classifications/104/codesAt.json?date=2021-01-19&presentationNamePattern=%7Bcode%7D%20%7Bname%7D'
+        url = 'https://data.ssb.no/api/klass/v1/classifications/104/codesAt.json?date=2021-01-19&presentationNamePattern=%7Bcode%7D%20%7Bname%7D'
         fylker = pd.read_json(url)['codes']
         fylker = pd.json_normalize(fylker)
         fylker = fylker.rename(columns={
